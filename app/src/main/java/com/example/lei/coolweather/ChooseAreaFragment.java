@@ -155,7 +155,7 @@ public class ChooseAreaFragment extends Fragment {
             int provinceCode = selectedProvince.getProvinceCode();
             int cityCode = selectedCity.getCityCode();
             String address = "http://guolin.tech/api/china/" + provinceCode + "/" +cityCode;
-            queryFromServer(address,"city");
+            queryFromServer(address,"county");
         }
     }
 
@@ -188,6 +188,7 @@ public class ChooseAreaFragment extends Fragment {
                 }else if("county".equals(type)){
                     result = Utility.handleCountyResponse(responseText,selectedCity.getId());
                 }
+
                 if (result){
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
