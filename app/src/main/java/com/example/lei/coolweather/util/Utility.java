@@ -4,11 +4,18 @@ import android.text.TextUtils;
 import com.example.lei.coolweather.db.City;
 import com.example.lei.coolweather.db.County;
 import com.example.lei.coolweather.db.Province;
+import com.example.lei.coolweather.gson.Weather;
+import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 服务器返回JSON格式的省市县数据
+ * 所以这里需要进行解析和处理这种JSON数据
+ */
 public class Utility {
+
     /**
      * 解析和处理服务器返回的省级数据
      */
@@ -75,5 +82,22 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    /**
+     * 将返回的JSON数据解析成Weather实体类
+     * @param responseDate
+     * @return
+     */
+    public static Weather handleWeatherResponse(String responseDate){
+        try {
+            JSONObject jsonObject = new JSONObject(responseDate);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

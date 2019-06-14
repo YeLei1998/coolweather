@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        tools:context="com.example.lei.coolweather.WeatherActivity">
+
+    <!--
+        由于FrameLayout默认情况会将空间放置在左上角
+        因此ScrollView会完全覆盖住ImageView,
+        从而ImageView也就成为了背景图片
+    -->
+    <ImageView
+            android:id="@+id/bing_pic_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+    <ScrollView
+            android:id="@+id/weather_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:overScrollMode="never">
+
+        <!--
+            由于ScrollView的内部只允许存在一个直接子布局,
+             因此这里又嵌套了一个垂直方向的LinearLayout,
+             然后在LinearLayout中将刚才定义的所有布局逐个引入-->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true">   <!--表示会为系统状态栏留出空间-->
+
+            <include layout="@layout/title"/>
+            <include layout="@layout/now"/>
+            <include layout="@layout/forecast"/>
+            <include layout="@layout/aqi"/>
+            <include layout="@layout/suggestion"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>
