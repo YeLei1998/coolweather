@@ -80,10 +80,24 @@ public class ChooseAreaFragment extends Fragment {
                     // 就启动WeatherActivity,
                     // 并把当前选中县的天气id传递过去
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    //判断一个对象是否属于某个类的实例
+                    if (getActivity() instanceof MainActivity) {
+                        //调用getActivity()方法,配合instanceof,可以判断出该碎片属于哪个类
+                        //如果是MainActivity中,则处理逻辑不变
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        //调用getActivity()方法,配合instanceof,可以判断出该碎片属于哪个类
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        //关闭滑动菜单
+                        activity.drawerLayout.closeDrawers();
+                        //显示下拉刷新进度条
+                        activity.swipeRefresh.setRefreshing(true);
+                        //请求新城市的天气信息
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });

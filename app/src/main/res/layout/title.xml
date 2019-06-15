@@ -4,6 +4,16 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
+    <!-- 加入切换城市的按钮,并让它居左显示 -->
+    <Button
+            android:id="@+id/title_cityButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_home"/>
+
     <!-- 居中显示城市名 -->
         <TextView
                 android:id="@+id/title_city"
