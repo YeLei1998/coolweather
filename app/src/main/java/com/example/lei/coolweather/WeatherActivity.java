@@ -47,11 +47,13 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            作用：将布局扩展到状态栏（手机最上面的一行）
+//            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            将系统状态栏透明化
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
         setContentView(R.layout.activity_weather);
         //找控件
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
@@ -186,6 +188,27 @@ public class WeatherActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
+    }
+
+    /**
+     * 退出程序的判断
+     */
+    boolean isAlreadyPress = false;
+    long pressTime;
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawers();
+        } else {
+            if (isAlreadyPress && System.currentTimeMillis() - pressTime < 3000) {
+                finish();
+            } else {
+                Toast.makeText(WeatherActivity.this, "再按一下退出", Toast.LENGTH_SHORT).show();
+                pressTime = System.currentTimeMillis();
+                isAlreadyPress = true;
+            }
+        }
     }
 
     /**

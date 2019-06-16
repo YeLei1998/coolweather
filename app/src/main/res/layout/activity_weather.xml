@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         tools:context="com.example.lei.coolweather.WeatherActivity">
 
     <!--
@@ -48,12 +48,15 @@
                         android:orientation="vertical"
                         android:fitsSystemWindows="true">   <!--表示会为系统状态栏留出空间-->
 
-                    <include layout="@layout/title"/>
-                    <include layout="@layout/now"/>
-                    <include layout="@layout/forecast"/>
-                    <include layout="@layout/aqi"/>
-                    <include layout="@layout/suggestion"/>
+                        <include layout="@layout/title"/>
 
+                        <include layout="@layout/now"/>
+
+                        <include layout="@layout/forecast"/>
+
+                        <include layout="@layout/aqi"/>
+
+                        <include layout="@layout/suggestion"/>
                 </LinearLayout>
             </ScrollView>
         </android.support.v4.widget.SwipeRefreshLayout>
